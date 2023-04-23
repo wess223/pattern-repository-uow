@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PatternRepositoryUoW.API.Data;
 using PatternRepositoryUoW.API.Data.Repositories;
 using PatternRepositoryUoW.API.Domain;
@@ -42,7 +43,7 @@ namespace PatternRepositoryUoW.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> RemoveDepartment(int id)
+        public async Task<IActionResult> RemoveDepartmentAsyc(int id)
         {
             var department = await _uow.DepartmentRepository.GetByIdAsync(id);
 
@@ -50,6 +51,19 @@ namespace PatternRepositoryUoW.API.Controllers
             _uow.Commit();
 
             return Ok(department);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConsultDepartmentAsync([FromQuery] string description)
+        {
+            var departments = await _uow.DepartmentRepository
+                .GetDataAsync(
+                p => p.Description.Contains(description),
+                p => p.Include(c => c.Collaborators),
+                take: 2
+                );
+
+            return Ok(departments);
         }
     }
 }
