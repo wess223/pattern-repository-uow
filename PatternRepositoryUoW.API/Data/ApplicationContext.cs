@@ -7,5 +7,10 @@ namespace PatternRepositoryUoW.API.Data
     {
         public DbSet<Department> Departments{ get; set; }
         public DbSet<Collaborator> Collaborators{ get; set; }
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base (options)
+        {
+
+        }
     }
 }
