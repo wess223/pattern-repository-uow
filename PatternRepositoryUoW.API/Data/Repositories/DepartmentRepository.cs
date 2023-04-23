@@ -1,18 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PatternRepositoryUoW.API.Data.Repositories.Base;
 using PatternRepositoryUoW.API.Domain;
 
 namespace PatternRepositoryUoW.API.Data.Repositories
 {
-    public class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : GenericRepository<Department>, IDepartmentRepository
     {
-        private readonly ApplicationContext _context;
-        private readonly DbSet<Department> _dbSet;
-        public DepartmentRepository(ApplicationContext context)
+        //private readonly ApplicationContext _context;
+        //private readonly DbSet<Department> _dbSet;
+        public DepartmentRepository(ApplicationContext context) : base(context)
         {
-            _context = context;
-            _dbSet = _context.Set<Department>();
+           // _context = context;
+            //_dbSet = _context.Set<Department>();
         }
 
+        /*
         public void Add(Department department)
         {
             _dbSet.Add(department);
@@ -22,6 +24,7 @@ namespace PatternRepositoryUoW.API.Data.Repositories
         {
             return await _dbSet.Include(c => c.Collaborators).FirstOrDefaultAsync(x => x.Id == id);
         }
+        */
 
         //public bool Save()
         //{

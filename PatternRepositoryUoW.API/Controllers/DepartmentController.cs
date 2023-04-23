@@ -40,5 +40,16 @@ namespace PatternRepositoryUoW.API.Controllers
 
             return Ok(department);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveDepartment(int id)
+        {
+            var department = await _uow.DepartmentRepository.GetByIdAsync(id);
+
+            _uow.DepartmentRepository.Remove(department);
+            _uow.Commit();
+
+            return Ok(department);
+        }
     }
 }
