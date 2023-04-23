@@ -28,7 +28,7 @@ namespace PatternRepositoryUoW.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pattern.Repository and UoW", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "EFCore.UoWRepository", Version = "v1" });
             });
 
             services.AddDbContext<ApplicationContext>(optionsBuilder =>
@@ -47,7 +47,7 @@ namespace PatternRepositoryUoW.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pattern.Repository and UoW v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EFCore.UoWRepository v1"));
             }
 
             DatabaseInitialize(app);

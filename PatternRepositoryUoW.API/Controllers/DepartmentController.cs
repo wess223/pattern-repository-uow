@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PatternRepositoryUoW.API.Data.Repositories;
+using PatternRepositoryUoW.API.Domain;
 
 namespace PatternRepositoryUoW.API.Controllers
 {
@@ -21,6 +22,15 @@ namespace PatternRepositoryUoW.API.Controllers
         {
             var departments = await _departmentRepository.GetByIdAsync(id);
             return Ok(departments);
+        }
+
+        [HttpPost]
+        public IActionResult CreateDepartment(Department department)
+        {
+            _departmentRepository.Add(department);
+            var saved = _departmentRepository.Save();
+
+            return Ok(department);
         }
     }
 }
