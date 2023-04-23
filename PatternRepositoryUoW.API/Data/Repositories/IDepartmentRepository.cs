@@ -6,6 +6,6 @@ namespace PatternRepositoryUoW.API.Data.Repositories
     {
         Task<Department> GetByIdAsync(int id);
         void Add(Department department);
-        bool Save();
+        //bool Save();
     }
 }

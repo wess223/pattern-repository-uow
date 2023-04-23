@@ -23,9 +23,9 @@ namespace PatternRepositoryUoW.API.Data.Repositories
             return await _dbSet.Include(c => c.Collaborators).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public bool Save()
-        {
-            return _context.SaveChanges() > 0;
-        }
+        //public bool Save()
+        //{
+        //    return _context.SaveChanges() > 0;
+        //}
     }
 }

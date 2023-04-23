@@ -38,6 +38,7 @@ namespace PatternRepositoryUoW.API
                     .EnableSensitiveDataLogging());
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }
 

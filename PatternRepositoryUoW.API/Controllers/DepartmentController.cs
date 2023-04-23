@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PatternRepositoryUoW.API.Data;
 using PatternRepositoryUoW.API.Data.Repositories;
 using PatternRepositoryUoW.API.Domain;
 
@@ -10,11 +11,13 @@ namespace PatternRepositoryUoW.API.Controllers
     {
         private readonly ILogger<DepartmentController> _logger;
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IUnitOfWork _uow;
 
-        public DepartmentController(ILogger<DepartmentController> logger, IDepartmentRepository departmentRepository)
+        public DepartmentController(ILogger<DepartmentController> logger, IDepartmentRepository departmentRepository, IUnitOfWork uow)
         {
             _logger = logger;
             _departmentRepository = departmentRepository;
+            _uow = uow;
         }
 
         [HttpGet("{id}")]
@@ -28,7 +31,9 @@ namespace PatternRepositoryUoW.API.Controllers
         public IActionResult CreateDepartment(Department department)
         {
             _departmentRepository.Add(department);
-            var saved = _departmentRepository.Save();
+            //var saved = _departmentRepository.Save();
+
+            _uow.Commit(); //SRP: Principio da responsabilidade unica. 05:23
 
             return Ok(department);
         }
